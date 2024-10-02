@@ -1,0 +1,74 @@
+{
+  "heros": [
+    {
+      "HeroId": 1,
+      "HeroName": "라이언",
+      "HeroClass": 2,
+      "HeroType": 5,
+      "HeroDescription": "어둠의 힘을 사용하는 워리어입니다"
+    },
+    {
+      "HeroId": 2,
+      "HeroName": "아리엘",
+      "HeroClass": 4,
+      "HeroType": 4,
+      "HeroDescription": "빛의 힘을 사용하는 소서러입니다"
+    },
+    {
+      "HeroId": 3,
+      "HeroName": "레나",
+      "HeroClass": 5,
+      "HeroType": 3,
+      "HeroDescription": "대지의 힘을 사용하는 레인저입니다"
+    },
+    {
+      "HeroId": 4,
+      "HeroName": "타이탄",
+      "HeroClass": 1,
+      "HeroType": 2,
+      "HeroDescription": "불의 힘을 사용하는 탱커입니다"
+    },
+    {
+      "HeroId": 5,
+      "HeroName": "루나",
+      "HeroClass": 6,
+      "HeroType": 1,
+      "HeroDescription": "물의 힘을 사용하는 서포터입니다"
+    },
+    {
+      "HeroId": 6,
+      "HeroName": "엘리엇",
+      "HeroClass": 2,
+      "HeroType": 4,
+      "HeroDescription": "빛의 힘을 사용하는 워리어입니다"
+    },
+    {
+      "HeroId": 7,
+      "HeroName": "자이언트",
+      "HeroClass": 1,
+      "HeroType": 3,
+      "HeroDescription": "대지의 힘을 사용하는 탱커입니다"
+    },
+    {
+      "HeroId": 8,
+      "HeroName": "발키리",
+      "HeroClass": 5,
+      "HeroType": 2,
+      "HeroDescription": "불의 힘을 사용하는 레인저입니다"
+    },
+    {
+      "HeroId": 9,
+      "HeroName": "카이",
+      "HeroClass": 4,
+      "HeroType": 5,
+      "HeroDescription": "어둠의 힘을 사용하는 소서러입니다"
+    },
+    {
+      "HeroId": 10,
+      "HeroName": "세라피나",
+      "HeroClass": 6,
+      "HeroType": 4,
+      "HeroDescription": "빛의 힘을 사용하는 서포터입니다"
+    }
+  ]
+}

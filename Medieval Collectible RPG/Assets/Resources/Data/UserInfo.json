@@ -1,0 +1,20 @@
+{
+  "users":[
+    {
+      "UserId": 19990428,
+      "UserName": "송창훈",
+      "UserLevel": 39,
+      "UserExp": 54300,
+      "UserGold": 5478334534,
+      "UserCash": 333
+    },
+    {
+      "UserId": 20020415,
+      "UserName": "송정훈",
+      "UserLevel": 1,
+      "UserExp": 0,
+      "UserGold": 333,
+      "UserCash": 33
+    }
+  ]
+}
