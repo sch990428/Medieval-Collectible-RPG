@@ -16,24 +16,24 @@ public class UI_Currency : MonoBehaviour
 
 	private string FormatNumber(long number)
 	{
-		if (number >= 1_0000_0000_0000) // Á¶´ÜÀ§
+		if (number >= 1_0000_0000_0000) // ì¡°ë‹¨ìœ„
 		{
-			double formatted = Math.Floor(number / 1_0000_0000_0000.0 * 10) / 10; // ¼Ò¼öÁ¡ Ã¹ ÀÚ¸® ³»¸²
-			return formatted.ToString("0.#") + "Á¶";
+			double formatted = Math.Floor(number / 1_0000_0000_0000.0 * 10) / 10; // ì†Œìˆ˜ì  ì²« ìë¦¬ ë‚´ë¦¼
+			return formatted.ToString("0.#") + "ì¡°";
 		}
-		else if (number >= 1_0000_0000) // ¾ï´ÜÀ§
+		else if (number >= 1_0000_0000) // ì–µë‹¨ìœ„
 		{
-			double formatted = Math.Floor(number / 1_0000_0000.0 * 10) / 10; // ¼Ò¼öÁ¡ Ã¹ ÀÚ¸® ³»¸²
-			return formatted.ToString("0.#") + "¾ï";
+			double formatted = Math.Floor(number / 1_0000_0000.0 * 10) / 10; // ì†Œìˆ˜ì  ì²« ìë¦¬ ë‚´ë¦¼
+			return formatted.ToString("0.#") + "ì–µ";
 		}
-		else if (number >= 1_0000) // ¸¸´ÜÀ§
+		else if (number >= 1_0000) // ë§Œë‹¨ìœ„
 		{
-			double formatted = Math.Floor(number / 1_0000.0 * 10) / 10; // ¼Ò¼öÁ¡ Ã¹ ÀÚ¸® ³»¸²
-			return formatted.ToString("0.#") + "¸¸";
+			double formatted = Math.Floor(number / 1_0000.0 * 10) / 10; // ì†Œìˆ˜ì  ì²« ìë¦¬ ë‚´ë¦¼
+			return formatted.ToString("0.#") + "ë§Œ";
 		}
 		else
 		{
-			return number.ToString(); // 10000 ¹Ì¸¸ÀÏ °æ¿ì ±×³É ¼ıÀÚ Ãâ·Â
+			return number.ToString(); // 10000 ë¯¸ë§Œì¼ ê²½ìš° ê·¸ëƒ¥ ìˆ«ì ì¶œë ¥
 		}
 	}
 
@@ -43,7 +43,6 @@ public class UI_Currency : MonoBehaviour
 		gold = DataManager.Instance.UserInfo.UserGold;
 		cash = DataManager.Instance.UserInfo.UserCash;
 
-		Debug.Log(gold);
 		goldText.text = FormatNumber(gold);
 		cashText.text = cash.ToString();
 	}
