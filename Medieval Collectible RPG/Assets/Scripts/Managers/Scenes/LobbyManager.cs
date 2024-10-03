@@ -15,10 +15,5 @@ public class LobbyManager : Singleton<LobbyManager>
 		UserInfo = DataManager.Instance.LoadJson<Data.UserInfoData, Data.UserInfo>("Data/UserInfo").LoadToClass();
 		HeroDict = DataManager.Instance.LoadJson<Data.HeroData, int, Data.HeroInfo>("Data/Hero").LoadToDictionary();
 		OwnHeroDict = DataManager.Instance.LoadJson<Data.CurrentPlayerOwnData, int, Data.CurrentPlayerOwnInfo>("Data/OwnInfo").LoadToDictionary();
-
-		foreach (KeyValuePair<int, Data.CurrentPlayerOwnInfo> h in OwnHeroDict)
-		{
-			Debug.Log($"{HeroDict[h.Value.HeroId].HeroName}의 레벨 {h.Value.HeroLevel}");
-		}
 	}
 }

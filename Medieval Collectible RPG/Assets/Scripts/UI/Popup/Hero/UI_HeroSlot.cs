@@ -30,7 +30,6 @@ public class UI_HeroSlot : MonoBehaviour
 		Data.HeroInfo heroinfo = LobbyManager.Instance.HeroDict[slotInfo.HeroId];
 
         GetComponent<Image>().color = HeroTypeColors[heroinfo.HeroType];
-        Debug.Log(HeroTypeColors[heroinfo.HeroType].ToString());
 
         HeroName.text = heroinfo.HeroName;
         HeroLevel.text = slotInfo.HeroLevel.ToString();
