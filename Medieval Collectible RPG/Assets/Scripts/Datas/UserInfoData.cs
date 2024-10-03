@@ -17,18 +17,6 @@ namespace Data
 		public int UserCash; // 캐시
 	}
 
-	// HeroOwn 클래스는 플레이어들이 가진 영웅들의 정보와 성장 상태를 관리합니다
-	// 같은 영웅을 여럿 모집할 수 있게 만들어 나중에 grade를 올릴 수 있어야합니다
-	[Serializable]
-	public class HeroOwnInfo
-	{
-		public int HeroOwnId; // 소유정보 코드
-		public int UserId; // 플레이어 식별코드
-		public int HeroId; // 영웅 코드
-		public int HeroGrade; // 해당 영웅의 등급
-		public int HeroLevel; // 해당 영웅의 레벨
-	}
-
 	[Serializable]
 	public class UserInfoData : ILoader<UserInfo>
 	{
