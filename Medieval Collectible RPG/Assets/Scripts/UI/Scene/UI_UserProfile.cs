@@ -13,7 +13,7 @@ public class UI_UserProfile : MonoBehaviour
 
 	private void Awake()
 	{
-		LobbyData = DataManager.Instance.UserInfo;
+		LobbyData = LobbyManager.Instance.UserInfo;
 
 		usernameText.text = LobbyData.UserName;
 		userLevelText.text = $"Lv. {LobbyData.UserLevel.ToString()}";

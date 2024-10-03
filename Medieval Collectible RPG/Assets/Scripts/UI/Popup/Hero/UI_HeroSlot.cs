@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroListController : MonoBehaviour
+public class UI_HeroSlot : MonoBehaviour
 {
     void Start()
     {

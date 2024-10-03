@@ -17,10 +17,6 @@ public interface ILoader<Key, Value>
 
 public class DataManager : Singleton<DataManager>
 {
-	public Data.UserInfo UserInfo { get; private set; } = new Data.UserInfo();
-	public Dictionary<int, Data.HeroInfo> HeroDict { get; private set; } = new Dictionary<int, Data.HeroInfo>();
-	public Dictionary<int, Data.CurrentPlayerOwnInfo> OwnHeroDict { get; private set; } = new Dictionary<int, Data.CurrentPlayerOwnInfo>();
-
 	public override void Awake()
 	{
 		base.Awake();
@@ -29,23 +25,16 @@ public class DataManager : Singleton<DataManager>
 
 	public void Init()
 	{
-		UserInfo = LoadJson<Data.UserInfoData, Data.UserInfo>("Data/UserInfo").LoadToClass();
-		HeroDict = LoadJson<Data.HeroData, int, Data.HeroInfo>("Data/Hero").LoadToDictionary();
-		OwnHeroDict = LoadJson<Data.CurrentPlayerOwnData, int, Data.CurrentPlayerOwnInfo>("Data/OwnInfo").LoadToDictionary();
-
-		foreach (KeyValuePair<int, Data.CurrentPlayerOwnInfo> h in OwnHeroDict)
-		{
-			Debug.Log($"{HeroDict[h.Value.HeroId].HeroName}의 레벨 {h.Value.HeroLevel}");
-		}
+		
 	}
 
-	Loader LoadJson<Loader, T>(string path) where Loader : ILoader<T>
+	public Loader LoadJson<Loader, T>(string path) where Loader : ILoader<T>
 	{
 		TextAsset textAsset = ResourceManager.Instance.Load<TextAsset>(path);
 		return JsonUtility.FromJson<Loader>(textAsset.text);
 	}
 
-	Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
+	public Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
 	{
 		TextAsset textAsset = ResourceManager.Instance.Load<TextAsset>(path);
 		return JsonUtility.FromJson<Loader>(textAsset.text);

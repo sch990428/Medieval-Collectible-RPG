@@ -40,8 +40,8 @@ public class UI_Currency : MonoBehaviour
 
 	private void Awake()
 	{
-		gold = DataManager.Instance.UserInfo.UserGold;
-		cash = DataManager.Instance.UserInfo.UserCash;
+		gold = LobbyManager.Instance.UserInfo.UserGold;
+		cash = LobbyManager.Instance.UserInfo.UserCash;
 
 		goldText.text = FormatNumber(gold);
 		cashText.text = cash.ToString();
