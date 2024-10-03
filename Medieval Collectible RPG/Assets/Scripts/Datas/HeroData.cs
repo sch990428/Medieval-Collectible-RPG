@@ -41,7 +41,7 @@ namespace Data
 		public int HeroId; // 영웅 코드
 		public string HeroName; // 영웅 이름
 		public int HeroClass; // 영웅 클래스
-		public string HeroType; // 영웅 속성
+		public int HeroType; // 영웅 속성
 		public string HeroDescription; // 영웅 설명
 	}
 
