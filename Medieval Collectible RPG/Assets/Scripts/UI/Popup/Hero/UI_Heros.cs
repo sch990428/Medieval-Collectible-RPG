@@ -18,7 +18,8 @@ public class UI_Heros : MonoBehaviour
 
 	public void Close()
 	{
-		StartCoroutine(CloseAfterDelay());
+		gameObject.SetActive(false);
+		//StartCoroutine(CloseAfterDelay());
 	}
 
 	private IEnumerator CloseAfterDelay()

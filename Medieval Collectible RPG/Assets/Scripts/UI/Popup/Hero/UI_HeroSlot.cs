@@ -10,8 +10,9 @@ public class UI_HeroSlot : MonoBehaviour
     public TextMeshProUGUI HeroName;
     public TextMeshProUGUI HeroLevel;
     public GameObject HeroGradeStar;
+	public GameObject HeroClassIcon;
 
-    public Data.CurrentPlayerOwnInfo slotInfo;
+	public Data.CurrentPlayerOwnInfo slotInfo;
 
 	public void Init()
     {
@@ -33,6 +34,7 @@ public class UI_HeroSlot : MonoBehaviour
 
         HeroName.text = heroinfo.HeroName;
         HeroLevel.text = slotInfo.HeroLevel.ToString();
+		HeroClassIcon.GetComponent<Image>().sprite = ResourceManager.Instance.Load<Sprite>($"Art/UI/Heros/HeroClassIcon/HeroClassIcon_{heroinfo.HeroClass}");
 
         for (int i = 0; i < slotInfo.HeroGrade; i++)
         {
