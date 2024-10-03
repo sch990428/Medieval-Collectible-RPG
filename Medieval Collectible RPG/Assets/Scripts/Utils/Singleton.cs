@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,31 +15,35 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             // 만일 싱글톤 객체가 연결되지 않았다면 T의 타입을 갖는 게임 오브젝트를 먼저 찾아본다
             if (instance == null)
             {
-                instance = (T)FindObjectOfType(typeof(T));
+                instance = (T)FindObjectOfType<T>();
 
                 // 그마저도 존재하지 않으면 T의 이름과 타입을 갖는 게임 오브젝트를 만들어준다
                 // 그리고 T를 컴포넌트로 추가한다
                 if (instance == null)
                 {
-                    GameObject go = new GameObject(typeof(T).Name, typeof(T));
+                    GameObject go = new GameObject(typeof(T).Name);
                     instance = go.AddComponent<T>();
                 }
             }
 
-            return instance;
+			return instance;
         }
     }
 
-	private void Awake()
+	public virtual void Awake()
 	{
-        // 부모 객체가 존재하는 경우에는 부모까지 포함하여 파괴되지않도록 설정
-        if (transform.parent != null && transform.root != null)
+        if (instance == null)
         {
-            DontDestroyOnLoad(this.transform.root.gameObject);
+            instance = this as T;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            DontDestroyOnLoad(this.gameObject);
+            if (instance != this)
+            {
+				Debug.Log($"{typeof(T).Name}을 파괴합니다");
+				Destroy(gameObject);
+            }
         }
 	}
 }

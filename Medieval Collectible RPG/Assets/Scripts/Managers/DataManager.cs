@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,11 @@ public class DataManager : Singleton<DataManager>
 {
 	public Data.UserInfo UserInfo { get; private set; } = new Data.UserInfo();
 	public Dictionary<int, Data.HeroInfo> HeroDict { get; private set; } = new Dictionary<int, Data.HeroInfo>();
+	public Dictionary<int, Data.CurrentPlayerOwnInfo> OwnHeroDict { get; private set; } = new Dictionary<int, Data.CurrentPlayerOwnInfo>();
 
-	public void Awake()
+	public override void Awake()
 	{
+		base.Awake();
 		Init();
 	}
 
@@ -28,10 +31,11 @@ public class DataManager : Singleton<DataManager>
 	{
 		UserInfo = LoadJson<Data.UserInfoData, Data.UserInfo>("Data/UserInfo").LoadToClass();
 		HeroDict = LoadJson<Data.HeroData, int, Data.HeroInfo>("Data/Hero").LoadToDictionary();
+		OwnHeroDict = LoadJson<Data.CurrentPlayerOwnData, int, Data.CurrentPlayerOwnInfo>("Data/OwnInfo").LoadToDictionary();
 
-		foreach (KeyValuePair<int, Data.HeroInfo> h in HeroDict)
+		foreach (KeyValuePair<int, Data.CurrentPlayerOwnInfo> h in OwnHeroDict)
 		{
-			Debug.Log(h.Value.HeroName);
+			Debug.Log($"{HeroDict[h.Value.HeroId].HeroName}의 레벨 {h.Value.HeroLevel}");
 		}
 	}
 
