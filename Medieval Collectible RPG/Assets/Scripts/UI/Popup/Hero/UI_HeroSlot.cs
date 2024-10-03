@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class UI_HeroSlot : MonoBehaviour
 {
+    public int HeroId;
+    public int HeroGrade;
+    public int HeroLevel;
+
     void Start()
     {
         

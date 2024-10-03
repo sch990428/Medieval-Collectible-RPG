@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LobbyManager : Singleton<LobbyManager>
 {
-	public Data.UserInfo UserInfo { get; private set; } = new Data.UserInfo();
-	public Dictionary<int, Data.HeroInfo> HeroDict { get; private set; } = new Dictionary<int, Data.HeroInfo>();
-	public Dictionary<int, Data.CurrentPlayerOwnInfo> OwnHeroDict { get; private set; } = new Dictionary<int, Data.CurrentPlayerOwnInfo>();
+	public Data.UserInfo UserInfo { get; private set; } = new Data.UserInfo(); // 플레이어 정보
+	public Dictionary<int, Data.HeroInfo> HeroDict { get; private set; } = new Dictionary<int, Data.HeroInfo>(); // 영웅 정보
+	public Dictionary<int, Data.CurrentPlayerOwnInfo> OwnHeroDict { get; private set; } = new Dictionary<int, Data.CurrentPlayerOwnInfo>(); // 플레이어의 소유 영웅 정보
 
 	public override void Awake()
 	{
