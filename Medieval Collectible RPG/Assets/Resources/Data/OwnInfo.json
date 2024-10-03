@@ -1,0 +1,25 @@
+{
+  "ownInfos": [
+    {
+      "HeroOwnId": 1,
+      "UserId": 19990428,
+      "HeroId": 1,
+      "HeroGrade": 2,
+      "HeroLevel": 143
+    },
+    {
+      "HeroOwnId": 2,
+      "UserId": 20020415,
+      "HeroId": 2,
+      "HeroGrade": 1,
+      "HeroLevel": 12
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 3,
+      "HeroGrade": 3,
+      "HeroLevel": 99
+    }
+  ]
+}
