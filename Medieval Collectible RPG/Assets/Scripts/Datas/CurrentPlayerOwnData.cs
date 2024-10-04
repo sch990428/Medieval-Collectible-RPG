@@ -48,6 +48,11 @@ namespace Data
 				}
 			}
 
+			for (int i = 0; i < 350; i++)
+			{
+				dict.Add(11 + i, new CurrentPlayerOwnInfo(new OwnInfo { HeroId = UnityEngine.Random.Range(1, 11) , HeroLevel = UnityEngine.Random.Range(1, 1000), HeroGrade = UnityEngine.Random.Range(1, 6) }));
+			}
+
 			return dict;
 		}
 	}
