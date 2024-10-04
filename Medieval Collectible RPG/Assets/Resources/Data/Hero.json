@@ -10,14 +10,14 @@
     {
       "HeroId": 2,
       "HeroName": "아리엘",
-      "HeroClass": 4,
+      "HeroClass": 3,
       "HeroType": 4,
       "HeroDescription": "빛의 힘을 사용하는 소서러입니다"
     },
     {
       "HeroId": 3,
       "HeroName": "레나",
-      "HeroClass": 5,
+      "HeroClass": 4,
       "HeroType": 3,
       "HeroDescription": "대지의 힘을 사용하는 레인저입니다"
     },
@@ -31,7 +31,7 @@
     {
       "HeroId": 5,
       "HeroName": "루나",
-      "HeroClass": 6,
+      "HeroClass": 5,
       "HeroType": 1,
       "HeroDescription": "물의 힘을 사용하는 서포터입니다"
     },
@@ -52,21 +52,21 @@
     {
       "HeroId": 8,
       "HeroName": "발키리",
-      "HeroClass": 5,
+      "HeroClass": 4,
       "HeroType": 2,
       "HeroDescription": "불의 힘을 사용하는 레인저입니다"
     },
     {
       "HeroId": 9,
       "HeroName": "카이",
-      "HeroClass": 4,
+      "HeroClass": 3,
       "HeroType": 5,
       "HeroDescription": "어둠의 힘을 사용하는 소서러입니다"
     },
     {
       "HeroId": 10,
       "HeroName": "세라피나",
-      "HeroClass": 6,
+      "HeroClass": 5,
       "HeroType": 4,
       "HeroDescription": "빛의 힘을 사용하는 서포터입니다"
     }

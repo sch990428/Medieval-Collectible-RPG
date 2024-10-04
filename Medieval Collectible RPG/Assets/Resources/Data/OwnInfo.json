@@ -17,9 +17,65 @@
     {
       "HeroOwnId": 3,
       "UserId": 19990428,
-      "HeroId": 3,
+      "HeroId": 2,
       "HeroGrade": 3,
       "HeroLevel": 99
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 3,
+      "HeroGrade": 3,
+      "HeroLevel": 12
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 4,
+      "HeroGrade": 1,
+      "HeroLevel": 7
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 5,
+      "HeroGrade": 2,
+      "HeroLevel": 9
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 6,
+      "HeroGrade": 3,
+      "HeroLevel": 1
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 7,
+      "HeroGrade": 4,
+      "HeroLevel": 29
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 8,
+      "HeroGrade": 3,
+      "HeroLevel": 59
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 9,
+      "HeroGrade": 3,
+      "HeroLevel": 959
+    },
+    {
+      "HeroOwnId": 3,
+      "UserId": 19990428,
+      "HeroId": 10,
+      "HeroGrade": 5,
+      "HeroLevel": 199
     }
   ]
 }
