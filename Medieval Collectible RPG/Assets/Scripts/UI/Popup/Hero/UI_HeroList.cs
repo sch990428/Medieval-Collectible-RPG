@@ -1,26 +1,36 @@
 using Data;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class FilterData
+{
+	public int ClassFilter;
+	public int TypeFilter;
+}
+
+
 public class UI_HeroList : MonoBehaviour
 {
-	List<Color32> HeroTypeColors;
-	UI_HeroSlot slot;
-	void Start()
-    {
-		// 영웅의 속성별 색상을 정의
-		HeroTypeColors = new List<Color32>()
-		{
-			new Color32(200, 200, 200, 255),
-			new Color32(173, 193, 255, 255),
-			new Color32(255, 190, 190, 255),
-			new Color32(178, 255, 185, 255),
-			new Color32(255, 255, 230, 255),
-			new Color32(163, 163, 163, 255)
-		};
+	[SerializeField]
+	private List<Color32> heroTypeColors; // 영웅 속성에 따른 슬롯 배경색
 
+	[SerializeField]
+	private List<Button> classFilterButtons; // 영웅 클래스에 따른 필터링 버튼
+
+	[SerializeField]
+	private List<Button> typeFilterButtons; // 영웅 속성에 따른 필터링 버튼
+
+	UI_HeroSlot slot;
+	private FilterData filterData;
+
+	void Start()
+	{
+		filterData = new FilterData() { ClassFilter = 0, TypeFilter = 0 };
+		UpdateClassFilter(0);
+		UpdateTypeFilter(0);
 		Init();
     }
 
@@ -36,36 +46,70 @@ public class UI_HeroList : MonoBehaviour
 			slot = go.GetComponent<UI_HeroSlot>();
 			slot.transform.SetParent(transform, false); // worldPositionStays를 false로 하여 로컬 벡터를 유지하도록 함
 
-			slot.HeroTypeColor = HeroTypeColors[heroinfo.HeroType];
+			slot.HeroTypeColor = heroTypeColors[heroinfo.HeroType];
 			slot.slotInfo = ownHero.Value;
 			slot.Init();
         }
     }
 
-	// 삭제하고 다시 Instantiate 하기보단 SetActive로 활성상태를 전환한다
-	public void SetClassFilter(int classFilter)
+	// 영웅의 직군 별로 선택값에 따라 필터링한다
+	public void UpdateClassFilter(int filter)
 	{
-		foreach (Transform heroSlot in transform)
-		{
-			if (classFilter == 0)
-			{
-				heroSlot.gameObject.SetActive(true);
-				continue;
-			}
+		filterData.ClassFilter = filter;
 
-			CurrentPlayerOwnInfo slotInfo = heroSlot.GetComponent<UI_HeroSlot>().slotInfo;  // 각 슬롯의 영웅 정보를 가져옴
-			if ((classFilter != 0 && LobbyManager.Instance.HeroDict[slotInfo.HeroId].HeroClass == classFilter))  // 필터 조건에 맞는지 확인
+		// 선택된 버튼과 나머지 버튼을 갱신한다
+		for (int i = 0; i < classFilterButtons.Count; i++)
+		{
+			if (i == filter)
 			{
-				heroSlot.gameObject.SetActive(true);  // 조건에 맞으면 활성화
+				classFilterButtons[i].image.color = new Color32(65, 65, 65, 255);
 			}
 			else
 			{
-				heroSlot.gameObject.SetActive(false);  // 조건에 맞지 않으면 비활성화
+				classFilterButtons[i].image.color = Color.white;
 			}
+		}
+
+		UpdateFilter();
+	}
+
+	// 영웅의 속성 별로 선택값에 따라 필터링한다
+	public void UpdateTypeFilter(int filter)
+	{
+		filterData.TypeFilter = filter;
+
+		// 선택된 버튼과 나머지 버튼을 갱신한다
+		for (int i = 0; i < typeFilterButtons.Count; i++)
+		{
+			if (i == filter)
+			{
+				typeFilterButtons[i].transform.GetChild(0).gameObject.SetActive(true);
+			}
+			else
+			{
+				typeFilterButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+			}
+		}
+
+		UpdateFilter();
+	}
+
+	// 필터에 따라 영웅 슬롯들을 갱신한다
+	public void UpdateFilter()
+	{
+		foreach(Transform slot in transform)
+		{
+			int slotHeroId = slot.GetComponent<UI_HeroSlot>().slotInfo.HeroId;
+			HeroInfo hero = LobbyManager.Instance.HeroDict[slotHeroId];
+
+			bool classCondition = filterData.ClassFilter == 0 || hero.HeroClass == filterData.ClassFilter;
+			bool typeCondition = filterData.TypeFilter == 0 || hero.HeroType == filterData.TypeFilter;
+
+			slot.gameObject.SetActive(classCondition && typeCondition);
 		}
 	}
 
-    void Update()
+	void Update()
     {
         
     }
