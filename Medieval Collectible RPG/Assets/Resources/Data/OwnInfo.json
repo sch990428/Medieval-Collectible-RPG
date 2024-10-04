@@ -32,14 +32,14 @@
       "HeroOwnId": 3,
       "UserId": 19990428,
       "HeroId": 4,
-      "HeroGrade": 1,
+      "HeroGrade": 3,
       "HeroLevel": 7
     },
     {
       "HeroOwnId": 3,
       "UserId": 19990428,
       "HeroId": 5,
-      "HeroGrade": 2,
+      "HeroGrade": 3,
       "HeroLevel": 9
     },
     {
@@ -53,7 +53,7 @@
       "HeroOwnId": 3,
       "UserId": 19990428,
       "HeroId": 7,
-      "HeroGrade": 4,
+      "HeroGrade": 3,
       "HeroLevel": 29
     },
     {
