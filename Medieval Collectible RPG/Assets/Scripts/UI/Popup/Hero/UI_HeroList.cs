@@ -14,7 +14,6 @@ public class HeroFilter
 	// 필터에 따라 영웅 슬롯들의 활성화 상태를 갱신합니다
 	public void UpdateFilter(List<UI_HeroSlot> slots)
 	{
-		Debug.Log("정렬");
 		foreach (UI_HeroSlot slot in slots)
 		{
 			int slotHeroId = slot.slotInfo.HeroId;
