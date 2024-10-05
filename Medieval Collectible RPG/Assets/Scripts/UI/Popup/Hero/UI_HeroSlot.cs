@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,8 @@ using UnityEngine.UI;
 
 public class UI_HeroSlot : MonoBehaviour, IListItem
 {
-    public TextMeshProUGUI HeroName;
+	public Image HeroPortrait;
+	public TextMeshProUGUI HeroName;
     public TextMeshProUGUI HeroLevel;
     public GameObject HeroGradeStar;
 	public GameObject HeroClassIcon;
@@ -25,6 +27,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
 
         GetComponent<Image>().color = HeroTypeColor;
 
+        HeroPortrait.sprite = ResourceManager.Instance.Load<Sprite>($"Art/Heros/Portraits/portrait_Hero{heroinfo.HeroId}");
         HeroName.text = heroinfo.HeroName;
         HeroLevel.text = slotInfo.HeroLevel.ToString();
 		HeroClassIcon.GetComponent<Image>().sprite = ResourceManager.Instance.Load<Sprite>($"Art/UI/Heros/HeroClassIcon/HeroClassIcon_{heroinfo.HeroClass}");

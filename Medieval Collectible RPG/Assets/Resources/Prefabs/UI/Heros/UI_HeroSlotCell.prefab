@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3207547, g: 0.26477394, b: 0.26477394, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -910,6 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4238743f789a34c82cf24546b66b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeroPortrait: {fileID: 1532313292212169568}
   HeroName: {fileID: 6353700298231996590}
   HeroLevel: {fileID: 8997274558263154158}
   HeroGradeStar: {fileID: 1186760995239607642}
