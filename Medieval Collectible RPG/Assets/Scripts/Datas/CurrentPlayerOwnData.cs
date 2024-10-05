@@ -51,7 +51,7 @@ namespace Data
 			}
 
 			// 임시 샘플데이터 추가
-			for (int i = 0; i < 350; i++)
+			for (int i = 0; i < 349; i++)
 			{
 				dict.Add(11 + i, new CurrentPlayerOwnHero(new OwnHero { HeroId = UnityEngine.Random.Range(1, 11) , HeroLevel = UnityEngine.Random.Range(1, 1000), HeroGrade = UnityEngine.Random.Range(1, 6) }));
 			}

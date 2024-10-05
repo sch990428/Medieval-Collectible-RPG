@@ -18,7 +18,6 @@ public class HeroFilter
 		{
 			int slotHeroId = slot.slotInfo.HeroId;
 			HeroInfo hero = LobbyManager.Instance.HeroDict[slotHeroId];
-			Debug.Log(slotHeroId);
 			bool classCondition = ClassFilter == 0 || hero.HeroClass == ClassFilter;
 			bool typeCondition = TypeFilter == 0 || hero.HeroType == TypeFilter;
 
