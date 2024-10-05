@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_HeroSlot : MonoBehaviour
+public class UI_HeroSlot : MonoBehaviour, IListItem
 {
     public TextMeshProUGUI HeroName;
     public TextMeshProUGUI HeroLevel;
@@ -19,7 +20,7 @@ public class UI_HeroSlot : MonoBehaviour
 
 	public void Init()
     {
-		// 현재 슬롯의 각 표현요소들에 값을 바인드합니다
+        // 현재 슬롯의 각 표현요소들에 값을 바인드합니다
 		Data.HeroInfo heroinfo = LobbyManager.Instance.HeroDict[slotInfo.HeroId];
 
         GetComponent<Image>().color = HeroTypeColor;
@@ -33,4 +34,9 @@ public class UI_HeroSlot : MonoBehaviour
             HeroGradeStar.transform.GetChild(i).gameObject.SetActive(true);
 		}
     }
+
+	public void OnPointerClick(PointerEventData eventData)
+	{
+        Debug.Log("아이템 클릭");
+	}
 }

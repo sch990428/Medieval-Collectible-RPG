@@ -6,17 +6,30 @@ using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FilterData
+public class HeroFilter
 {
 	public int ClassFilter;
 	public int TypeFilter;
+
+	// 필터에 따라 영웅 슬롯들의 활성화 상태를 갱신한다
+	public void UpdateFilter(List<UI_HeroSlot> slots)
+	{
+		Debug.Log("정렬");
+		foreach (UI_HeroSlot slot in slots)
+		{
+			int slotHeroId = slot.slotInfo.HeroId;
+			HeroInfo hero = LobbyManager.Instance.HeroDict[slotHeroId];
+			Debug.Log(slotHeroId);
+			bool classCondition = ClassFilter == 0 || hero.HeroClass == ClassFilter;
+			bool typeCondition = TypeFilter == 0 || hero.HeroType == TypeFilter;
+
+			slot.gameObject.SetActive(classCondition && typeCondition);
+		}
+	}
 }
 
-
-public class UI_HeroList : MonoBehaviour
+public class UI_HeroList : UI_List<UI_HeroSlot>
 {
-	private List<UI_HeroSlot> slots;
-
 	[SerializeField]
 	private List<Color32> heroTypeColors; // 영웅 속성에 따른 슬롯 배경색
 
@@ -32,13 +45,14 @@ public class UI_HeroList : MonoBehaviour
 	[SerializeField]
 	private Toggle toggleAsending; // 정렬 순서(오름, 내림)를 선택하는 토글버튼
 
-	UI_HeroSlot slot;
-	private FilterData filterData;
+	private HeroFilter listFilter;
 
-	void Start()
+	protected override void Awake()
 	{
-		slots = new List<UI_HeroSlot>();
-		filterData = new FilterData() { ClassFilter = 0, TypeFilter = 0 };
+		base.Awake();
+
+		listFilter = new HeroFilter() { ClassFilter = 0, TypeFilter = 0 };
+
 		sortDropdown.onValueChanged.AddListener(UpdateSort);
 		toggleAsending.onValueChanged.AddListener(UpdateAscending);
 
@@ -49,23 +63,23 @@ public class UI_HeroList : MonoBehaviour
 		UpdateSort(0); // 최초 정렬 호출
 	}
 
-    public void Init()
+    public override void Init()
     {
+		base.Init();
+
 		// 플레이어가 소유한 영웅들을 표시하기 위한 슬롯을 생성하고 배치
 		foreach (KeyValuePair<int, Data.CurrentPlayerOwnInfo> ownHero in LobbyManager.Instance.OwnHeroDict)
         {
             Data.HeroInfo heroinfo = LobbyManager.Instance.HeroDict[ownHero.Value.HeroId];
 
-			GameObject go = ResourceManager.Instance.Instantiate("Prefabs/UI/Heros/UI_HeroSlotCell");
-
-			slot = go.GetComponent<UI_HeroSlot>();
-			slot.transform.SetParent(transform, false); // worldPositionStays를 false로 하여 로컬 벡터를 유지하도록 함
+			UI_HeroSlot slot = CreateItem("Prefabs/UI/Heros/UI_HeroSlotCell");
 
 			slot.HeroTypeColor = heroTypeColors[heroinfo.HeroType];
 			slot.slotInfo = ownHero.Value;
+
 			slot.Init();
 
-			slots.Add(slot);
+			Add(slot);
         }
 
 		// 정렬을 위한 버튼들에 값변경 리스너 추가
@@ -76,7 +90,7 @@ public class UI_HeroList : MonoBehaviour
 	// 영웅의 직군 별로 선택값에 따라 필터링한다
 	public void UpdateClassFilter(int filter)
 	{
-		filterData.ClassFilter = filter;
+		listFilter.ClassFilter = filter;
 
 		// 선택된 버튼과 나머지 버튼을 갱신한다
 		for (int i = 0; i < classFilterButtons.Count; i++)
@@ -91,13 +105,13 @@ public class UI_HeroList : MonoBehaviour
 			}
 		}
 
-		UpdateFilter();
+		listFilter.UpdateFilter(items);
 	}
 
 	// 영웅의 속성 별로 선택값에 따라 필터링한다
 	public void UpdateTypeFilter(int filter)
 	{
-		filterData.TypeFilter = filter;
+		listFilter.TypeFilter = filter;
 
 		// 선택된 버튼과 나머지 버튼을 갱신한다
 		for (int i = 0; i < typeFilterButtons.Count; i++)
@@ -112,22 +126,7 @@ public class UI_HeroList : MonoBehaviour
 			}
 		}
 
-		UpdateFilter();
-	}
-
-	// 필터에 따라 영웅 슬롯들의 활성화 상태를 갱신한다
-	public void UpdateFilter()
-	{
-		foreach(Transform slot in transform)
-		{
-			int slotHeroId = slot.GetComponent<UI_HeroSlot>().slotInfo.HeroId;
-			HeroInfo hero = LobbyManager.Instance.HeroDict[slotHeroId];
-
-			bool classCondition = filterData.ClassFilter == 0 || hero.HeroClass == filterData.ClassFilter;
-			bool typeCondition = filterData.TypeFilter == 0 || hero.HeroType == filterData.TypeFilter;
-
-			slot.gameObject.SetActive(classCondition && typeCondition);
-		}
+		listFilter.UpdateFilter(items);
 	}
 
 	// 이름순 정렬
@@ -217,21 +216,21 @@ public class UI_HeroList : MonoBehaviour
 		switch (option)
 		{
 			case 0:
-				slots.Sort((a, b) => CompareHerosByGrade(a, b, toggleAsending.isOn));
+				items.Sort((a, b) => CompareHerosByGrade(a, b, toggleAsending.isOn));
 				break;
 
 			case 1:
-				slots.Sort((a, b) => CompareHerosByLevel(a, b, toggleAsending.isOn));
+				items.Sort((a, b) => CompareHerosByLevel(a, b, toggleAsending.isOn));
 				break;
 
 			case 2:
-				slots.Sort((a, b) => CompareHerosByName(a, b, toggleAsending.isOn));
+				items.Sort((a, b) => CompareHerosByName(a, b, toggleAsending.isOn));
 				break;
 		}
 
-		for (int i = 0; i < slots.Count; i++)
+		for (int i = 0; i < items.Count; i++)
 		{
-			slots[i].transform.SetSiblingIndex(i);
+			items[i].transform.SetSiblingIndex(i);
 		}
 	}
 
