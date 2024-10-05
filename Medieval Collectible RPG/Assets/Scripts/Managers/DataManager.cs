@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 데이터를 T 클래스로 불러올 ILoader 인터페이스를 선언한다
+// 데이터를 T 클래스로 불러올 ILoader 인터페이스를 선언
 public interface ILoader<T>
 {
 	T LoadToClass();
 }
 
-// 데이터를 딕셔너리로 불러올 ILoader 인터페이스를 선언한다
+// 데이터를 딕셔너리로 불러올 ILoader 인터페이스를 선언
 public interface ILoader<Key, Value>
 {
 	Dictionary<Key, Value> LoadToDictionary();

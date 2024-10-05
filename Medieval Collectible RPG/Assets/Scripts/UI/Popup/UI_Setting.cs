@@ -13,7 +13,7 @@ public class UI_Setting : MonoBehaviour
 
 	private void OnEnable()
 	{
-		// ¼³Á¤Ã¢¿¡¼­ ¼³Á¤ °ªµéÀ» È°¼ºÈ­ÇÑ´Ù
+		// ì„¤ì •ì°½ì—ì„œ ì„¤ì • ê°’ë“¤ì„ í™œì„±í™”
 	}
 
 	public void Close()

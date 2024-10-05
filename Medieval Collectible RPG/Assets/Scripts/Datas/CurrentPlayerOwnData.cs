@@ -6,14 +6,16 @@ using UnityEngine;
 namespace Data
 {
 	// 현재 플레이하는 플레이어가 가진 영웅들의 정보를 관리합니다
-	public class CurrentPlayerOwnInfo
+	public class CurrentPlayerOwnHero
 	{
 		public int HeroId; // 영웅 코드
 		public int HeroGrade; // 영웅 등급
 		public int HeroLevel; // 영웅 레벨
 
-		public CurrentPlayerOwnInfo(OwnInfo oi)
+		public CurrentPlayerOwnHero(OwnHero oi)
 		{
+			// OwnHero 리스트에서 접속중인 유저의 식별코드를 비교하고 
+			// 소유정보코드와 식별코드를 제외한 나머지를 불러옵니다
 			HeroId = oi.HeroId;
 			HeroGrade = oi.HeroGrade;
 			HeroLevel = oi.HeroLevel;
@@ -23,7 +25,7 @@ namespace Data
 	// HeroOwn 클래스는 모든 플레이어들이 가진 영웅들의 정보와 성장 상태를 관리합니다
 	// 같은 영웅을 여럿 모집할 수 있게 만들어 나중에 grade를 올릴 수 있어야합니다
 	[Serializable]
-	public class OwnInfo
+	public class OwnHero
 	{
 		public int HeroOwnId; // 소유정보 코드
 		public int UserId; // 플레이어 식별코드
@@ -33,24 +35,25 @@ namespace Data
 	}
 
 	[Serializable]
-	public class CurrentPlayerOwnData : ILoader<int, CurrentPlayerOwnInfo>
+	public class CurrentPlayerOwnHeroData : ILoader<int, CurrentPlayerOwnHero>
 	{
-		public List<OwnInfo> ownInfos = new List<OwnInfo>();
+		public List<OwnHero> ownInfos = new List<OwnHero>();
 
-		public Dictionary<int, CurrentPlayerOwnInfo> LoadToDictionary()
+		public Dictionary<int, CurrentPlayerOwnHero> LoadToDictionary()
 		{
-			Dictionary<int, CurrentPlayerOwnInfo> dict = new Dictionary<int, CurrentPlayerOwnInfo>();
-			foreach (OwnInfo own in ownInfos)
+			Dictionary<int, CurrentPlayerOwnHero> dict = new Dictionary<int, CurrentPlayerOwnHero>();
+			foreach (OwnHero own in ownInfos)
 			{
 				if (own.UserId == 19990428)
 				{
-					dict.Add(own.HeroId, new CurrentPlayerOwnInfo(own));
+					dict.Add(own.HeroId, new CurrentPlayerOwnHero(own));
 				}
 			}
 
+			// 임시 샘플데이터 추가
 			for (int i = 0; i < 350; i++)
 			{
-				dict.Add(11 + i, new CurrentPlayerOwnInfo(new OwnInfo { HeroId = UnityEngine.Random.Range(1, 11) , HeroLevel = UnityEngine.Random.Range(1, 1000), HeroGrade = UnityEngine.Random.Range(1, 6) }));
+				dict.Add(11 + i, new CurrentPlayerOwnHero(new OwnHero { HeroId = UnityEngine.Random.Range(1, 11) , HeroLevel = UnityEngine.Random.Range(1, 1000), HeroGrade = UnityEngine.Random.Range(1, 6) }));
 			}
 
 			return dict;

@@ -11,7 +11,7 @@ public class HeroFilter
 	public int ClassFilter;
 	public int TypeFilter;
 
-	// 필터에 따라 영웅 슬롯들의 활성화 상태를 갱신한다
+	// 필터에 따라 영웅 슬롯들의 활성화 상태를 갱신합니다
 	public void UpdateFilter(List<UI_HeroSlot> slots)
 	{
 		Debug.Log("정렬");
@@ -68,7 +68,7 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 		base.Init();
 
 		// 플레이어가 소유한 영웅들을 표시하기 위한 슬롯을 생성하고 배치
-		foreach (KeyValuePair<int, Data.CurrentPlayerOwnInfo> ownHero in LobbyManager.Instance.OwnHeroDict)
+		foreach (KeyValuePair<int, Data.CurrentPlayerOwnHero> ownHero in LobbyManager.Instance.OwnHeroDict)
         {
             Data.HeroInfo heroinfo = LobbyManager.Instance.HeroDict[ownHero.Value.HeroId];
 
@@ -87,12 +87,12 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 		toggleAsending.onValueChanged.AddListener(UpdateAscending);
 	}
 
-	// 영웅의 직군 별로 선택값에 따라 필터링한다
+	// 영웅의 직군 별로 선택값에 따라 필터링합니다
 	public void UpdateClassFilter(int filter)
 	{
 		listFilter.ClassFilter = filter;
 
-		// 선택된 버튼과 나머지 버튼을 갱신한다
+		// 선택된 버튼과 나머지 버튼을 갱신합니다
 		for (int i = 0; i < classFilterButtons.Count; i++)
 		{
 			if (i == filter)
@@ -108,12 +108,12 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 		listFilter.UpdateFilter(items);
 	}
 
-	// 영웅의 속성 별로 선택값에 따라 필터링한다
+	// 영웅의 속성 별로 선택값에 따라 필터링합니다
 	public void UpdateTypeFilter(int filter)
 	{
 		listFilter.TypeFilter = filter;
 
-		// 선택된 버튼과 나머지 버튼을 갱신한다
+		// 선택된 버튼과 나머지 버튼을 갱신합니다
 		for (int i = 0; i < typeFilterButtons.Count; i++)
 		{
 			if (i == filter)
@@ -210,7 +210,7 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 		UpdateSort(sortDropdown.value);
 	}
 
-	// 기준에 따라 영웅 슬롯들을 정렬한다
+	// 기준에 따라 영웅 슬롯들을 정렬합니다
 	public void UpdateSort(int option)
 	{
 		switch (option)

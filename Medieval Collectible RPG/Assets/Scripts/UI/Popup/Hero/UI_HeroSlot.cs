@@ -14,7 +14,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
     public GameObject HeroGradeStar;
 	public GameObject HeroClassIcon;
 
-	public Data.CurrentPlayerOwnInfo slotInfo;
+	public Data.CurrentPlayerOwnHero slotInfo;
 
     public Color32 HeroTypeColor;
 
@@ -29,6 +29,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
         HeroLevel.text = slotInfo.HeroLevel.ToString();
 		HeroClassIcon.GetComponent<Image>().sprite = ResourceManager.Instance.Load<Sprite>($"Art/UI/Heros/HeroClassIcon/HeroClassIcon_{heroinfo.HeroClass}");
 
+        // 영웅의 등급에 따라 표시할 별의 개수를 정합니다
         for (int i = 0; i < slotInfo.HeroGrade; i++)
         {
             HeroGradeStar.transform.GetChild(i).gameObject.SetActive(true);
