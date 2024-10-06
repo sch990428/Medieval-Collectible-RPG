@@ -41,6 +41,7 @@ public class ResourceManager : Singleton<ResourceManager>
             return;
         }
 
-        Destroy(go, t);
+        // 유니티 엔진의 Destroy() 함수를 호출합니다
+        UnityEngine.Object.Destroy(go, t);
     }
 }

@@ -15,6 +15,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
     public TextMeshProUGUI HeroLevel;
     public GameObject HeroGradeStar;
 	public GameObject HeroClassIcon;
+	public Canvas HeroDetailCanvas;
 
 	public Data.CurrentPlayerOwnHero slotInfo;
 
@@ -41,6 +42,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-        Debug.Log("아이템 클릭");
+        HeroDetailCanvas.GetComponent<UI_HeroDetail>().SetInfo(slotInfo);
+        HeroDetailCanvas.gameObject.SetActive(true);
 	}
 }

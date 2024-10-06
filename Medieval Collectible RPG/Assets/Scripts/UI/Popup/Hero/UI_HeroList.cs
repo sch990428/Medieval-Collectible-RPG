@@ -43,6 +43,9 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 	[SerializeField]
 	private Toggle toggleAsending; // 정렬 순서(오름, 내림)를 선택하는 토글버튼
 
+	[SerializeField]
+	private Canvas heroDetailCanvas; // 영웅 상세 정보 UI
+
 	private HeroFilter listFilter;
 
 	protected override void Awake()
@@ -74,6 +77,7 @@ public class UI_HeroList : UI_List<UI_HeroSlot>
 
 			slot.HeroTypeColor = heroTypeColors[heroinfo.HeroType];
 			slot.slotInfo = ownHero.Value;
+			slot.HeroDetailCanvas = heroDetailCanvas;
 
 			slot.Init();
 
