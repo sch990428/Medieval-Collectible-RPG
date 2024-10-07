@@ -19,6 +19,12 @@ public class UI_HeroDetail : MonoBehaviour
 	[SerializeField]
 	Image heroClassImage;
 
+	[SerializeField]
+	TextMeshProUGUI heroLevelText;
+
+	[SerializeField]
+	TextMeshProUGUI heroStatText;
+
 
 	[SerializeField]
 	Color32[] heroTypeColor;
@@ -73,9 +79,27 @@ public class UI_HeroDetail : MonoBehaviour
         {
             heroGradeStar.transform.GetChild(i).gameObject.SetActive(true);
         }
+
+        heroLevelText.text = GetLevelToText();
+        heroStatText.text = GetStatsToText();
     }
 
-    public void RemoveModel()
+    public string GetLevelToText()
+    {
+        return $"Lv {ownData.HeroLevel} / <#941F00>{20 * ownData.HeroGrade - 1}</color>";
+    }
+
+	public string GetStatsToText()
+	{
+		return $"{heroData.HeroStats.MaxHp + 100 * ownData.HeroLevel}\n" +
+            $"{heroData.HeroStats.MeleeDamage * ownData.HeroLevel}\n" +
+            $"{heroData.HeroStats.MagicDamage * ownData.HeroLevel}\n" +
+            $"{heroData.HeroStats.MeleeDefence * ownData.HeroLevel}\n" +
+            $"{heroData.HeroStats.MagicDefence * ownData.HeroLevel}\n" +
+            $"{heroData.HeroStats.AttackSpeed + 1 * (ownData.HeroLevel / 30)}\n";
+	}
+
+	public void RemoveModel()
     {
         // 모델을 제거합니다(세부정보 창 종료)
         ResourceManager.Instance.Destroy(heroModel);
