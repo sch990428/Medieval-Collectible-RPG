@@ -42,7 +42,7 @@ public class UI_HeroSlot : MonoBehaviour, IListItem
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-        HeroDetailCanvas.GetComponent<UI_HeroDetail>().SetInfo(slotInfo);
+        HeroDetailCanvas.GetComponent<UI_HeroDetail>().Init(slotInfo);
         HeroDetailCanvas.gameObject.SetActive(true);
 	}
 }

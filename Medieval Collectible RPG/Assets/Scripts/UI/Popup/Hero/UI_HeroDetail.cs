@@ -13,39 +13,49 @@ public class UI_HeroDetail : MonoBehaviour
     TextMeshProUGUI heroDescription;
 
     private Data.HeroInfo heroData;
+    private Data.CurrentPlayerOwnHero ownData;
+
     private GameObject heroModel;
 
     // 캐릭터 모델의 레이어를 바꿉니다
     // 모델 프리팹의 계층구조를 순회하며 재귀적으로 모든 요소를 바꿔야합니다
-	void SetLayerRecursively(GameObject obj, int newLayer)
+	void SetLayerRecursively(GameObject go, int newLayer)
 	{
-		if (obj == null)
+		if (go == null)
 			return;
 
 		// 현재 오브젝트의 레이어 설정
-		obj.layer = newLayer;
+		go.layer = newLayer;
 
 		// 자식 오브젝트들의 레이어도 재귀적으로 설정
-		foreach (Transform child in obj.transform)
+		foreach (Transform child in go.transform)
 		{
 			SetLayerRecursively(child.gameObject, newLayer);
 		}
 	}
 
-	public void SetInfo(Data.CurrentPlayerOwnHero data)
+	public void Init(Data.CurrentPlayerOwnHero data)
     {
+        // 세부정보 창에 영웅의 기본 데이터와 소유 정보를 불러옵니다
         heroData = LobbyManager.Instance.HeroDict[data.HeroId];
+        ownData = data;
 
+        // 모델을 표시하고 모델 오브젝트의 각종 트랜스폼 등을 조정합니다
         heroModel = ResourceManager.Instance.Instantiate($"Prefabs/Heros/Hero_{data.HeroId}/Hero{data.HeroId}");
         heroModel.transform.SetParent(transform, false);
         SetLayerRecursively(heroModel, 6);
         heroModel.transform.localPosition = new Vector3(-960, -542, 0);
         heroModel.transform.Rotate(new Vector3(0, 180f, 0));
         heroModel.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+
+        // 하위 UI요소들을 변경합니다
+        heroName.text = heroData.HeroName;
+        heroDescription.text = heroData.HeroDescription;
     }
 
     public void RemoveModel()
     {
+        // 모델을 제거합니다(세부정보 창 종료)
         ResourceManager.Instance.Destroy(heroModel);
     }
 }
