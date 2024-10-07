@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_HeroDetail : MonoBehaviour
 {
@@ -12,7 +13,17 @@ public class UI_HeroDetail : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI heroDescription;
 
-    private Data.HeroInfo heroData;
+	[SerializeField]
+	GameObject heroGradeStar;
+
+	[SerializeField]
+	Image heroClassImage;
+
+
+	[SerializeField]
+	Color32[] heroTypeColor;
+
+	private Data.HeroInfo heroData;
     private Data.CurrentPlayerOwnHero ownData;
 
     private GameObject heroModel;
@@ -51,6 +62,17 @@ public class UI_HeroDetail : MonoBehaviour
         // 하위 UI요소들을 변경합니다
         heroName.text = heroData.HeroName;
         heroDescription.text = heroData.HeroDescription;
+        heroClassImage.sprite = ResourceManager.Instance.Load<Sprite>($"Art/UI/Heros/HeroClassIcon/HeroClassIcon_{heroData.HeroClass}");
+        heroClassImage.color = heroTypeColor[heroData.HeroType];
+
+		for (int i = 0; i < 5; i++)
+		{
+			heroGradeStar.transform.GetChild(i).gameObject.SetActive(false);
+		}
+		for (int i = 0; i < ownData.HeroGrade; i++)
+        {
+            heroGradeStar.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 
     public void RemoveModel()
