@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class HeroFilter
 {
@@ -23,6 +24,118 @@ public class HeroFilter
 			bool typeCondition = TypeFilter == 0 || hero.HeroType == TypeFilter;
 
 			slot.gameObject.SetActive(classCondition && typeCondition);
+		}
+	}
+}
+
+public interface ICompareStrategy<T, Tdata> where T : IListItem<Tdata>
+{
+	int Compare(T item1, T item2, bool isAsending);
+}
+
+public class CompareByHeroNameStrategy<T, Tdata> : ICompareStrategy<T, Tdata> 
+	where T : IListItem<Tdata>
+	where Tdata : Data.CurrentPlayerOwnHero
+{
+	public int Compare(T item1, T item2, bool isAsending)
+	{
+		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[item1.ListItemInfo.HeroId];
+		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[item2.ListItemInfo.HeroId];
+
+		int nameComparison = isAsending ? heroB.HeroName.CompareTo(heroA.HeroName) : heroA.HeroName.CompareTo(heroB.HeroName);
+
+		// 이름이 같다면 등급으로 비교
+		if (nameComparison == 0)
+		{
+			int gradeComparison = item2.ListItemInfo.HeroGrade.CompareTo(item1.ListItemInfo.HeroGrade);
+
+			if (gradeComparison == 0)
+			{
+				// 등급도 같으면 레벨로 비교
+				return item2.ListItemInfo.HeroLevel.CompareTo(item1.ListItemInfo.HeroLevel);
+			}
+
+			return gradeComparison;
+		}
+
+		return nameComparison; // 등급이 다르면 등급 기준으로 정렬
+	}
+}
+
+public class CompareByHeroGradeStrategy<T, Tdata> : ICompareStrategy<T, Tdata>
+	where T : IListItem<Tdata>
+	where Tdata : Data.CurrentPlayerOwnHero
+{
+	public int Compare(T item1, T item2, bool isAsending)
+	{
+		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[item1.ListItemInfo.HeroId];
+		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[item2.ListItemInfo.HeroId];
+
+		int gradeComparison = isAsending ? item2.ListItemInfo.HeroGrade.CompareTo(item1.ListItemInfo.HeroGrade) : item1.ListItemInfo.HeroGrade.CompareTo(item2.ListItemInfo.HeroGrade);
+
+		// 등급이 같다면 레벨로 비교
+		if (gradeComparison == 0)
+		{
+			int levelComparison = item2.ListItemInfo.HeroLevel.CompareTo(item1.ListItemInfo.HeroLevel);
+
+			if (levelComparison == 0)
+			{
+				// 레벨도 같으면 이름으로 비교
+				return heroA.HeroName.CompareTo(heroB.HeroName);
+			}
+
+			return levelComparison;
+		}
+
+		return gradeComparison; // 등급이 다르면 등급 기준으로 정렬
+	}
+}
+
+public class CompareByHeroLevelStrategy<T, Tdata> : ICompareStrategy<T, Tdata>
+	where T : IListItem<Tdata>
+	where Tdata : Data.CurrentPlayerOwnHero
+{
+	public int Compare(T item1, T item2, bool isAsending)
+	{
+		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[item1.ListItemInfo.HeroId];
+		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[item2.ListItemInfo.HeroId];
+
+		int levelComparison = isAsending ? item2.ListItemInfo.HeroLevel.CompareTo(item1.ListItemInfo.HeroLevel) : item1.ListItemInfo.HeroLevel.CompareTo(item2.ListItemInfo.HeroLevel);
+
+		// 레벨이 같다면 등급으로 비교
+		if (levelComparison == 0)
+		{
+			int gradeComparison = item2.ListItemInfo.HeroGrade.CompareTo(item1.ListItemInfo.HeroGrade);
+
+			if (gradeComparison == 0)
+			{
+				// 등급도 같으면 이름으로 비교
+				return heroA.HeroName.CompareTo(heroB.HeroName);
+			}
+
+			return gradeComparison;
+		}
+
+		return levelComparison; // 등급이 다르면 등급 기준으로 정렬
+	}
+}
+
+public class HeroSorter
+{
+	private ICompareStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero> compareStrategy;
+
+	public void SetStrategy(ICompareStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero> strategy)
+	{
+		compareStrategy = strategy;
+	}
+
+	public void Sort(List<UI_HeroSlot> items, bool isAsending)
+	{
+		items.Sort((a,b)=>compareStrategy.Compare(a, b, isAsending));
+
+		for (int i = 0; i < items.Count; i++)
+		{
+			items[i].transform.SetSiblingIndex(i);
 		}
 	}
 }
@@ -48,12 +161,15 @@ public class UI_HeroList : UI_List<UI_HeroSlot, Data.CurrentPlayerOwnHero>
 	private Canvas heroDetailCanvas; // 영웅 상세 정보 UI
 
 	private HeroFilter heroFilter;
+	private HeroSorter heroSorter;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
 		heroFilter = new HeroFilter() { ClassFilter = 0, TypeFilter = 0 };
+		heroSorter = new HeroSorter();
+		heroSorter.SetStrategy(new CompareByHeroGradeStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero>());
 
 		sortDropdown.onValueChanged.AddListener(UpdateSort);
 		toggleAsending.onValueChanged.AddListener(UpdateAscending);
@@ -132,81 +248,6 @@ public class UI_HeroList : UI_List<UI_HeroSlot, Data.CurrentPlayerOwnHero>
 		heroFilter.UpdateFilter(items);
 	}
 
-	// 이름순 정렬
-	public int CompareHerosByName(UI_HeroSlot slotA, UI_HeroSlot slotB, bool isAsending = false)
-	{
-		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[slotA.ListItemInfo.HeroId];
-		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[slotB.ListItemInfo.HeroId];
-
-		int nameComparison = isAsending? heroB.HeroName.CompareTo(heroA.HeroName) : heroA.HeroName.CompareTo(heroB.HeroName);
-
-		// 이름이 같다면 등급으로 비교
-		if (nameComparison == 0)
-		{
-			int gradeComparison = slotB.ListItemInfo.HeroGrade.CompareTo(slotA.ListItemInfo.HeroGrade);
-
-			if (gradeComparison == 0)
-			{
-				// 등급도 같으면 레벨로 비교
-				return slotB.ListItemInfo.HeroLevel.CompareTo(slotA.ListItemInfo.HeroLevel);
-			}
-
-			return gradeComparison;
-		}
-
-		return nameComparison; // 등급이 다르면 등급 기준으로 정렬
-	}
-
-	// 등급순 정렬
-	public int CompareHerosByGrade(UI_HeroSlot slotA, UI_HeroSlot slotB, bool isAsending = false)
-	{
-		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[slotA.ListItemInfo.HeroId];
-		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[slotB.ListItemInfo.HeroId];
-
-		int gradeComparison = isAsending ? slotB.ListItemInfo.HeroGrade.CompareTo(slotA.ListItemInfo.HeroGrade) : slotA.ListItemInfo.HeroGrade.CompareTo(slotB.ListItemInfo.HeroGrade);
-
-		// 등급이 같다면 레벨로 비교
-		if (gradeComparison == 0)
-		{
-			int levelComparison = slotB.ListItemInfo.HeroLevel.CompareTo(slotA.ListItemInfo.HeroLevel);
-
-			if (levelComparison == 0)
-			{
-				// 레벨도 같으면 이름으로 비교
-				return heroA.HeroName.CompareTo(heroB.HeroName);
-			}
-
-			return levelComparison;
-		}
-
-		return gradeComparison; // 등급이 다르면 등급 기준으로 정렬
-	}
-
-	// 레벨순 정렬
-	public int CompareHerosByLevel(UI_HeroSlot slotA, UI_HeroSlot slotB, bool isAsending = false)
-	{
-		Data.HeroInfo heroA = LobbyManager.Instance.HeroDict[slotA.ListItemInfo.HeroId];
-		Data.HeroInfo heroB = LobbyManager.Instance.HeroDict[slotB.ListItemInfo.HeroId];
-
-		int levelComparison = isAsending ? slotB.ListItemInfo.HeroLevel.CompareTo(slotA.ListItemInfo.HeroLevel) : slotA.ListItemInfo.HeroLevel.CompareTo(slotB.ListItemInfo.HeroLevel);
-
-		// 레벨이 같다면 등급으로 비교
-		if (levelComparison == 0)
-		{
-			int gradeComparison = slotB.ListItemInfo.HeroGrade.CompareTo(slotA.ListItemInfo.HeroGrade);
-
-			if (gradeComparison == 0)
-			{
-				// 등급도 같으면 이름으로 비교
-				return heroA.HeroName.CompareTo(heroB.HeroName);
-			}
-
-			return gradeComparison;
-		}
-
-		return levelComparison; // 등급이 다르면 등급 기준으로 정렬
-	}
-
 	// 정렬 순서 변경시 호출되는 중간함수
 	public void UpdateAscending(bool toggle)
 	{
@@ -219,22 +260,19 @@ public class UI_HeroList : UI_List<UI_HeroSlot, Data.CurrentPlayerOwnHero>
 		switch (option)
 		{
 			case 0:
-				items.Sort((a, b) => CompareHerosByGrade(a, b, toggleAsending.isOn));
+				heroSorter.SetStrategy(new CompareByHeroGradeStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero>());
 				break;
 
 			case 1:
-				items.Sort((a, b) => CompareHerosByLevel(a, b, toggleAsending.isOn));
+				heroSorter.SetStrategy(new CompareByHeroLevelStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero>());
 				break;
 
 			case 2:
-				items.Sort((a, b) => CompareHerosByName(a, b, toggleAsending.isOn));
+				heroSorter.SetStrategy(new CompareByHeroNameStrategy<UI_HeroSlot, Data.CurrentPlayerOwnHero>());
 				break;
 		}
 
-		for (int i = 0; i < items.Count; i++)
-		{
-			items[i].transform.SetSiblingIndex(i);
-		}
+		heroSorter.Sort(items, toggleAsending.isOn);
 	}
 
 	void Update()
