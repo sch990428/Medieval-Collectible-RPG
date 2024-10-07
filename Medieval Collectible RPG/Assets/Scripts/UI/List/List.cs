@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IList<T> where T : IListItem
+public interface IList<T, Tdata> where T : IListItem<Tdata>
 {
 	public void Init();
 	public void Add(T item);
@@ -10,7 +10,7 @@ public interface IList<T> where T : IListItem
 	public T CreateItem(string path);
 }
 
-public class UI_List<T> : MonoBehaviour, IList<T> where T : MonoBehaviour, IListItem
+public class UI_List<T, Tdata> : MonoBehaviour, IList<T, Tdata> where T : MonoBehaviour, IListItem<Tdata>
 {
 	protected List<T> items;
 
