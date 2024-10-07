@@ -28,6 +28,10 @@ public class DataManager : Singleton<DataManager>
 		
 	}
 
+	// Loader는 ILoader 인터페이스를 구현한 클래스
+	// 특정한 로더 클래스를 지정할 수 있도록 만들어짐
+	// 그 클래스는 데이터를 T 혹은 Dictionary<Key-Value> 타입 등으로 반환
+
 	public Loader LoadJson<Loader, T>(string path) where Loader : ILoader<T>
 	{
 		TextAsset textAsset = ResourceManager.Instance.Load<TextAsset>(path);

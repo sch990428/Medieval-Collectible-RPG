@@ -18,7 +18,7 @@ namespace Data
 	}
 
 	[Serializable]
-	public class UserInfoData : ILoader<UserInfo>
+	public class UserInfoLoader : ILoader<UserInfo>
 	{
 		// 이런 식으로 모든 유저의 정보를 불러오는 것은 위험하지만
 		// 지금은 포트폴리오 용도의 싱글플레이 게임이므로 전부 불러와서 특정 사용자를 찾는다

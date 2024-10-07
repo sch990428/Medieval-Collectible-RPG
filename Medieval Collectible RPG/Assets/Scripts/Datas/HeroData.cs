@@ -46,7 +46,7 @@ namespace Data
 	}
 
 	[Serializable]
-	public class HeroData : ILoader<int, HeroInfo>
+	public class HeroInfoLoader : ILoader<int, HeroInfo>
 	{
 		public List<HeroInfo> heros = new List<HeroInfo>();
 

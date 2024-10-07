@@ -12,8 +12,8 @@ public class LobbyManager : Singleton<LobbyManager>
 	{
 		base.Awake();
 
-		UserInfo = DataManager.Instance.LoadJson<Data.UserInfoData, Data.UserInfo>("Data/UserInfo").LoadToClass();
-		HeroDict = DataManager.Instance.LoadJson<Data.HeroData, int, Data.HeroInfo>("Data/Hero").LoadToDictionary();
-		OwnHeroDict = DataManager.Instance.LoadJson<Data.CurrentPlayerOwnHeroData, int, Data.CurrentPlayerOwnHero>("Data/OwnInfo").LoadToDictionary();
+		UserInfo = DataManager.Instance.LoadJson<Data.UserInfoLoader, Data.UserInfo>("Data/UserInfo").LoadToClass();
+		HeroDict = DataManager.Instance.LoadJson<Data.HeroInfoLoader, int, Data.HeroInfo>("Data/Hero").LoadToDictionary();
+		OwnHeroDict = DataManager.Instance.LoadJson<Data.CurrentPlayerOwnHeroLoader, int, Data.CurrentPlayerOwnHero>("Data/OwnInfo").LoadToDictionary();
 	}
 }
