@@ -5,18 +5,16 @@ using UnityEngine;
 
 namespace Data
 {
-	public class DefaultStat
+	[Serializable]
+	public class HeroStat
 	{
-		public int HeroId;
 		public int MaxHp;
 		public int MaxMp;
 		public int MeleeDamage;
 		public int MagicDamage;
 		public int MeleeDefence;
 		public int MagicDefence;
-		public int CriticalChance;
-		public int CriticalDamage;
-		public int AvoidChance;
+		public int AttackSpeed;
 	}
 
 	public class Skill
@@ -43,6 +41,7 @@ namespace Data
 		public int HeroClass; // 영웅 클래스
 		public int HeroType; // 영웅 속성
 		public string HeroDescription; // 영웅 설명
+		public HeroStat HeroStats; // 영웅 스탯
 	}
 
 	[Serializable]

@@ -5,70 +5,150 @@
       "HeroName": "라이언",
       "HeroClass": 2,
       "HeroType": 5,
-      "HeroDescription": "어둠의 힘을 사용하는 워리어입니다"
+      "HeroDescription": "어둠의 힘을 사용하는 워리어입니다",
+      "HeroStats":{
+        "MaxHp": 250,
+        "MeleeDamage": 20,
+        "MagicDamage": 10,
+        "MeleeDefence": 20,
+        "MagicDefence": 10,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 2,
       "HeroName": "아리엘",
       "HeroClass": 3,
       "HeroType": 4,
-      "HeroDescription": "빛의 힘을 사용하는 소서러입니다"
+      "HeroDescription": "빛의 힘을 사용하는 소서러입니다",
+      "HeroStats":{
+        "MaxHp": 100,
+        "MeleeDamage": 5,
+        "MagicDamage": 30,
+        "MeleeDefence": 5,
+        "MagicDefence": 20,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 3,
       "HeroName": "레나",
       "HeroClass": 4,
       "HeroType": 3,
-      "HeroDescription": "대지의 힘을 사용하는 레인저입니다"
+      "HeroDescription": "대지의 힘을 사용하는 레인저입니다",
+      "HeroStats":{
+        "MaxHp": 200,
+        "MeleeDamage": 30,
+        "MagicDamage": 15,
+        "MeleeDefence": 10,
+        "MagicDefence": 5,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 4,
       "HeroName": "타이탄",
       "HeroClass": 1,
       "HeroType": 2,
-      "HeroDescription": "불의 힘을 사용하는 탱커입니다"
+      "HeroDescription": "불의 힘을 사용하는 탱커입니다",
+      "HeroStats":{
+        "MaxHp": 400,
+        "MeleeDamage": 5,
+        "MagicDamage": 5,
+        "MeleeDefence": 30,
+        "MagicDefence": 20,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 5,
       "HeroName": "루나",
       "HeroClass": 5,
       "HeroType": 1,
-      "HeroDescription": "물의 힘을 사용하는 서포터입니다"
+      "HeroDescription": "물의 힘을 사용하는 서포터입니다",
+      "HeroStats":{
+        "MaxHp": 170,
+        "MeleeDamage": 10,
+        "MagicDamage": 20,
+        "MeleeDefence": 10,
+        "MagicDefence": 20,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 6,
       "HeroName": "엘리엇",
       "HeroClass": 2,
       "HeroType": 4,
-      "HeroDescription": "빛의 힘을 사용하는 워리어입니다"
+      "HeroDescription": "빛의 힘을 사용하는 워리어입니다",
+      "HeroStats":{
+        "MaxHp": 250,
+        "MeleeDamage": 10,
+        "MagicDamage": 20,
+        "MeleeDefence": 10,
+        "MagicDefence": 20,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 7,
       "HeroName": "자이언트",
       "HeroClass": 1,
       "HeroType": 3,
-      "HeroDescription": "대지의 힘을 사용하는 탱커입니다"
+      "HeroDescription": "대지의 힘을 사용하는 탱커입니다",
+      "HeroStats":{
+        "MaxHp": 400,
+        "MeleeDamage": 5,
+        "MagicDamage": 5,
+        "MeleeDefence": 20,
+        "MagicDefence": 30,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 8,
       "HeroName": "발키리",
       "HeroClass": 4,
       "HeroType": 2,
-      "HeroDescription": "불의 힘을 사용하는 레인저입니다"
+      "HeroDescription": "불의 힘을 사용하는 레인저입니다",
+      "HeroStats":{
+        "MaxHp": 200,
+        "MeleeDamage": 10,
+        "MagicDamage": 30,
+        "MeleeDefence": 10,
+        "MagicDefence": 10,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 9,
       "HeroName": "카이",
       "HeroClass": 3,
       "HeroType": 5,
-      "HeroDescription": "어둠의 힘을 사용하는 소서러입니다"
+      "HeroDescription": "어둠의 힘을 사용하는 소서러입니다",
+      "HeroStats":{
+        "MaxHp": 100,
+        "MeleeDamage": 5,
+        "MagicDamage": 40,
+        "MeleeDefence": 5,
+        "MagicDefence": 10,
+        "AttackSpeed": 10
+      }
     },
     {
       "HeroId": 10,
       "HeroName": "세라피나",
       "HeroClass": 5,
       "HeroType": 4,
-      "HeroDescription": "빛의 힘을 사용하는 서포터입니다"
+      "HeroDescription": "빛의 힘을 사용하는 서포터입니다",
+      "HeroStats":{
+        "MaxHp": 140,
+        "MeleeDamage": 20,
+        "MagicDamage": 20,
+        "MeleeDefence": 10,
+        "MagicDefence": 10,
+        "AttackSpeed": 10
+      }
     }
   ]
 }
