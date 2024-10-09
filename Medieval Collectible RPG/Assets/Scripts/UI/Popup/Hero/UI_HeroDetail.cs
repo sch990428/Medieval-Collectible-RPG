@@ -67,6 +67,7 @@ public class UI_HeroDetail : MonoBehaviour
         heroModel.transform.Rotate(new Vector3(0, 180f, 0));
         heroModel.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
 
+        // 모델 오브젝트에 애니메이션 컨트롤러를 연결합니다
         Animator anim = heroModel.GetComponent<Animator>();
         if (anim == null)
         {
@@ -74,6 +75,7 @@ public class UI_HeroDetail : MonoBehaviour
         }
         anim.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>("Animation/Heros/LobbyHeroAnimController");
 
+        // 모델 오브젝트를 표시할 UI에 타겟 영웅의 모델을 설정합니다
         HeroModelDisplayer.GetComponent<UI_HeroModel>().TargetHero = heroModel;
 
         // 하위 UI요소들을 변경합니다
