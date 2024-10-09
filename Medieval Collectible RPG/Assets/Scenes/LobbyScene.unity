@@ -210,13 +210,14 @@ GameObject:
   - component: {fileID: 24701614}
   - component: {fileID: 24701613}
   - component: {fileID: 24701612}
+  - component: {fileID: 24701616}
   m_Layer: 5
   m_Name: HeroRecruitCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &24701612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +301,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &24701616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24701610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3327b5d7809119c4fb13d9d09a38af51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &25588923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2283,7 +2296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406274173}
   m_Layer: 5
-  m_Name: HeroDetail_UI
+  m_Name: HeroRecruit_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
