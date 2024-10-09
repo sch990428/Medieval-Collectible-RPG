@@ -25,6 +25,8 @@ public class UI_HeroDetail : MonoBehaviour
 	[SerializeField]
 	TextMeshProUGUI heroStatText;
 
+    [SerializeField]
+    RawImage HeroModelDisplayer;
 
 	[SerializeField]
 	Color32[] heroTypeColor;
@@ -64,6 +66,15 @@ public class UI_HeroDetail : MonoBehaviour
         heroModel.transform.localPosition = new Vector3(-960, -542, 0);
         heroModel.transform.Rotate(new Vector3(0, 180f, 0));
         heroModel.transform.localScale = new Vector3(1.75f, 1.75f, 1.75f);
+
+        Animator anim = heroModel.GetComponent<Animator>();
+        if (anim == null)
+        {
+            anim = heroModel.AddComponent<Animator>();
+        }
+        anim.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>("Animation/Heros/LobbyHeroAnimController");
+
+        HeroModelDisplayer.GetComponent<UI_HeroModel>().TargetHero = heroModel;
 
         // 하위 UI요소들을 변경합니다
         heroName.text = heroData.HeroName;
