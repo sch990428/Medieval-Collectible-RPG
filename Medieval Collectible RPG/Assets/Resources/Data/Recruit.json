@@ -4,19 +4,15 @@
       "RecruitId": 0,
       "RecruitName": "일반소환",
       "RecruitShortName": "일반소환",
-      "RecruitDesciption": "새로운 영웅들을 만나보세요"
+      "RecruitDesciption": "새로운 영웅들을 만나보세요",
+      "RecruitBackgrund": "Backgrounds_GeneralRecruit"
     },
     {
       "RecruitId": 1,
       "RecruitName": "라이언 픽업 소환",
       "RecruitShortName": "라이언 픽업",
-      "RecruitDesciption": "라이언의 소환확률이 2배 증가합니다"
-    },
-    {
-      "RecruitId": 2,
-      "RecruitName": "탱커 픽업 소환",
-      "RecruitShortName": "탱커 픽업",
-      "RecruitDesciption": "탱커의 소환확률이 2배 증가합니다"
+      "RecruitDesciption": "라이언의 소환확률이 2배 증가합니다",
+      "RecruitBackgrund": "Backgrounds_Hero1Pickup"
     }
   ]
 }
