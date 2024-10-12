@@ -915,6 +915,7 @@ MonoBehaviour:
   HeroLevel: {fileID: 8997274558263154158}
   HeroGradeStar: {fileID: 1186760995239607642}
   HeroClassIcon: {fileID: 584410999927291935}
+  HeroDetailCanvas: {fileID: 0}
   HeroTypeColor:
     serializedVersion: 2
     rgba: 0
