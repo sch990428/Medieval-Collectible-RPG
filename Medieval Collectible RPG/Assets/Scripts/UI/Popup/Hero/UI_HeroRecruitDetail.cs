@@ -4,15 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HeroRecruitDetail : MonoBehaviour
+public class UI_HeroRecruitDetail : MenuDetailPage
 {
-	[SerializeField]
-	private UI_HeroRecruitMenu recruitMenu;
-
 	private void Awake()
 	{
-		recruitMenu.OnMenuIndexChanged -= UpdateDetails;
-		recruitMenu.OnMenuIndexChanged += UpdateDetails;
+		Init();
 
 		foreach (KeyValuePair<int, Data.RecruitEventInfo> pair in LobbyManager.Instance.RecruitEventDict)
 		{
@@ -24,7 +20,7 @@ public class UI_HeroRecruitDetail : MonoBehaviour
 		}
 	}
 
-	private void UpdateDetails(int index)
+	protected override void UpdateDetails(int index)
 	{
 		for (int i = 0; i < transform.childCount; i++)
 		{

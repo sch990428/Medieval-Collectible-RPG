@@ -3,18 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HeroRecruitMenu : MonoBehaviour
+public class UI_HeroRecruitMenu : SideMenu
 {
-	public int SelectedMenuIndex;
-
-	public Action<int> OnMenuIndexChanged;
-
 	private void Awake()
 	{
-		SelectedMenuIndex = 0;
+		Init();
 
 		foreach (KeyValuePair<int, Data.RecruitEventInfo> pair in LobbyManager.Instance.RecruitEventDict)
 		{
@@ -22,8 +19,7 @@ public class UI_HeroRecruitMenu : MonoBehaviour
 			go.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = pair.Value.RecruitShortName;
 			go.GetComponent<Button>().onClick.AddListener(() =>
 			{
-				SelectedMenuIndex = pair.Key;
-				OnMenuIndexChanged.Invoke(SelectedMenuIndex);
+				ChangeMenuIndex(pair.Key);
 			});
 		}
 	}
