@@ -13,6 +13,7 @@ public class UI_HeroRecruitMenu : SideMenu
 	{
 		Init();
 
+		// RecruitEvent 데이터에 존재하는 만큼 버튼을 생성해주고 리스너를 할당합니다
 		foreach (KeyValuePair<int, Data.RecruitEventInfo> pair in LobbyManager.Instance.RecruitEventDict)
 		{
 			GameObject go = ResourceManager.Instance.Instantiate($"Prefabs/UI/Heros/RecruitOptionButton", transform);

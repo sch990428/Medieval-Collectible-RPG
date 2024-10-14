@@ -9,91 +9,51 @@ public class RecruitCutsceneController : MonoBehaviour
 	[SerializeField]
 	Camera mainCamera;
 
-	private int totalHeroNum;
-	private bool recruitEnd = false;
+	private bool recruitEnd;
+	public IRecruitStrategy recruitStrategy; // 소환 전략
 
-	private void Awake()
-	{
-		totalHeroNum = LobbyManager.Instance.HeroDict.Count;
-	}
+	List<int> recruitResult; // 소환 결과 리스트
 
 	private void OnEnable()
 	{
-		mainCamera.gameObject.SetActive(false);
+		mainCamera.gameObject.SetActive(false); // 메인카메라를 비활성화
+	}
 
-		//GeneralRecruit();
-		HeroPickUpRecruit(1);
+	public void StartRecruit(int recruitId, int count)
+	{
+		recruitEnd = false;
 
+		// recruitId에 따라 소환 전략을 할당
+		switch (recruitId)
+		{
+			case 0:
+				recruitStrategy = new GeneralRecruitStrategy();
+				break;
+			case 1:
+				recruitStrategy = new Hero1PickUpRecruitStrategy();
+				break;
+		}
+
+		recruitResult = recruitStrategy.Recruit(count);
 		recruitEnd = true;
 	}
 
 	private void OnDisable()
 	{
-		mainCamera.gameObject.SetActive(true);
-	}
-
-	private bool IsHero()
-	{
-		int random = UnityEngine.Random.Range(1, 11);
-
-		return random == 1 || random == 2;
-	}
-
-	private void GeneralRecruit()
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			if (IsHero())
-			{
-				int random = UnityEngine.Random.Range(1, totalHeroNum + 1);
-				Debug.Log(LobbyManager.Instance.HeroDict[random].HeroName);
-			}
-			else
-			{
-				Debug.Log("꽝");
-			}
-		}
-
-		gameObject.SetActive(false);
-	}
-
-	private void HeroPickUpRecruit(int target)
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			if (IsHero())
-			{
-				int random = UnityEngine.Random.Range(1, totalHeroNum + 2);
-				if (random == totalHeroNum + 1)
-				{
-					random = target;
-				}
-
-				string MSG = "";
-				if (random == target)
-				{
-					MSG = "[@@PickUp@@]";
-				}
-
-				Debug.Log($"{MSG}{LobbyManager.Instance.HeroDict[random].HeroName}");
-			}
-			else
-			{
-				Debug.Log("꽝");
-			}
-		}
+		mainCamera.gameObject.SetActive(true);  // 메인카메라를 활성화
 	}
 
 	private void ClosedCutscene()
 	{
-		gameObject.SetActive(false);
+		gameObject.SetActive(false);	
 	}
 
 	private void Update()
 	{
-		if (Input.GetMouseButton(0) && recruitEnd)
+		// 화면이 한번 클릭되면 연출을 스킵합니다
+		if (Input.GetMouseButtonUp(0) && recruitEnd)
 		{
-			Invoke(nameof(ClosedCutscene), 0.5f);
+			Invoke(nameof(ClosedCutscene), 0.2f);
 		}
 	}
 }
