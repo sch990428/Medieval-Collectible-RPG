@@ -14,6 +14,8 @@ public class RecruitCutsceneController : MonoBehaviour
 	private bool recruitEnd;
 	public IRecruitStrategy recruitStrategy; // 소환 전략
 
+	int RecruitId;
+
 	List<int> recruitResult; // 소환 결과 리스트
 
 	private void OnEnable()
@@ -24,7 +26,7 @@ public class RecruitCutsceneController : MonoBehaviour
 	public void StartRecruit(int recruitId, int count)
 	{
 		recruitEnd = false;
-
+		RecruitId = recruitId;
 		// recruitId에 따라 소환 전략을 할당
 		switch (recruitId)
 		{
@@ -51,6 +53,12 @@ public class RecruitCutsceneController : MonoBehaviour
 			go.transform.SetParent(resultPanel.transform.GetChild(0), false);
 			UI_RecruitedHeroCell slot = go.GetComponent<UI_RecruitedHeroCell>();
 			slot.HeroId = i;
+
+			if (RecruitId == 1 && i == 1)
+			{
+				slot.PickUpText.gameObject.SetActive(true);
+			}
+
 			slot.Init();
 		}
 	}

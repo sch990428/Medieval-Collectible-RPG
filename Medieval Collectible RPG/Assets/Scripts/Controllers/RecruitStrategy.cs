@@ -48,8 +48,8 @@ public class Hero1PickUpRecruitStrategy : IRecruitStrategy
 
 			if (random == 1 || random == 2)
 			{
-				int whichHero = UnityEngine.Random.Range(1, totalHeroNum + 2);
-				if (whichHero == totalHeroNum + 1)
+				int whichHero = UnityEngine.Random.Range(1, totalHeroNum + 3);
+				if (whichHero >= totalHeroNum + 1)
 				{
 					whichHero = 1;
 				}

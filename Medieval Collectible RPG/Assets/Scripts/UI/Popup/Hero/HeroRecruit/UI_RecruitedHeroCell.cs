@@ -13,6 +13,7 @@ public class UI_RecruitedHeroCell : MonoBehaviour, IListItem<Data.CurrentPlayerO
 	public Image HeroPortrait;
 	public TextMeshProUGUI HeroName;
 	public GameObject HeroClassIcon;
+	public GameObject PickUpText;
 
     public int HeroId;
 	public Data.CurrentPlayerOwnHero ListItemInfo
@@ -38,6 +39,7 @@ public class UI_RecruitedHeroCell : MonoBehaviour, IListItem<Data.CurrentPlayerO
 			Destroy(HeroPortrait);
 			Destroy(HeroName);
 			Destroy(HeroClassIcon);
+			Destroy(PickUpText);
 		} 
     }
 
