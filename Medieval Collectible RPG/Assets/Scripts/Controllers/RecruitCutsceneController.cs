@@ -8,6 +8,8 @@ public class RecruitCutsceneController : MonoBehaviour
 {
 	[SerializeField]
 	Camera mainCamera;
+	[SerializeField]
+	GameObject resultPanel;
 
 	private bool recruitEnd;
 	public IRecruitStrategy recruitStrategy; // 소환 전략
@@ -41,6 +43,16 @@ public class RecruitCutsceneController : MonoBehaviour
 	private void OnDisable()
 	{
 		mainCamera.gameObject.SetActive(true);  // 메인카메라를 활성화
+
+		resultPanel.SetActive(true);
+		foreach (int i in recruitResult)
+		{
+			GameObject go = ResourceManager.Instance.Instantiate("Prefabs/UI/Heros/RecruitedHeroCell");
+			go.transform.SetParent(resultPanel.transform.GetChild(0), false);
+			UI_RecruitedHeroCell slot = go.GetComponent<UI_RecruitedHeroCell>();
+			slot.HeroId = i;
+			slot.Init();
+		}
 	}
 
 	private void ClosedCutscene()

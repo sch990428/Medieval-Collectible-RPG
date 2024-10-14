@@ -20,6 +20,15 @@ namespace Data
 			HeroGrade = oi.HeroGrade;
 			HeroLevel = oi.HeroLevel;
 		}
+
+		public CurrentPlayerOwnHero(int id, int grade, int level)
+		{
+			// EntirePlayerOwnHero 리스트에서 접속중인 유저의 식별코드를 비교하고 
+			// 소유정보코드와 식별코드를 제외한 나머지를 불러옵니다
+			HeroId = id;
+			HeroGrade = grade;
+			HeroLevel = level;
+		}
 	}
 
 	// HeroOwn 클래스는 모든 플레이어들이 가진 영웅들의 정보와 성장 상태를 관리합니다
